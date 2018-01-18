@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ForumApp.Forum.Ports.Rest")]
+[assembly: AssemblyTitle("ForumApp.Common")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ForumApp.Forum.Ports.Rest")]
+[assembly: AssemblyProduct("ForumApp.Common")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("8cc482a1-26b4-4709-9bff-f3493e0e6c7e")]
+[assembly: Guid("6313c73c-d145-4b92-90c4-dcf2985d81b5")]
 
 // Version information for an assembly consists of the following four values:
 //

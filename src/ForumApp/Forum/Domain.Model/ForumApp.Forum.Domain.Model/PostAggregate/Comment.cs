@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ForumApp.Common.Domain.Model;
+﻿using ForumApp.Common.Domain.Model;
 
 namespace ForumApp.Forum.Domain.Model.PostAggregate
 {

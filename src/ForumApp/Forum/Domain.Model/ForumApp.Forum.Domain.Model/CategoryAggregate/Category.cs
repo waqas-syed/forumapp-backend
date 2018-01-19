@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using ForumApp.Common.Domain.Model;
-using ForumApp.Forum.Domain.Model.PostAggregate;
+﻿using ForumApp.Common.Domain.Model;
 
 namespace ForumApp.Forum.Domain.Model.CategoryAggregate
 {

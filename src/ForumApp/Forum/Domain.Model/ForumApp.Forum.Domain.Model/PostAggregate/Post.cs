@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using ForumApp.Common.Domain.Model;
+﻿using ForumApp.Common.Domain.Model;
 using ForumApp.Forum.Domain.Model.CategoryAggregate;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace ForumApp.Forum.Domain.Model.PostAggregate
 {
@@ -15,6 +15,18 @@ namespace ForumApp.Forum.Domain.Model.PostAggregate
     {
         private string _title;
         private string _description;
+        private IList<Comment> _comments;
+
+        public Post(string title, string description)
+        {
+            Title = title;
+            Description = description;
+        }
+
+        public void AddNewComment(Comment comment)
+        {
+            _comments.Add(comment);
+        }
 
         public string Title
         {
@@ -45,6 +57,11 @@ namespace ForumApp.Forum.Domain.Model.PostAggregate
 
         public IList<Category> Categories { get; set; }
 
-        public IList<Comment> Comments { get; set; }
+        public IReadOnlyCollection<Comment> Comments
+        {
+            // We only show the Read-Only collection to the world outside of this entity, so that no one can
+            // change it, thus honoring the Single Responsiblity principle
+            get { return new ReadOnlyCollection<Comment>(_comments); }
+        }
     }
 }

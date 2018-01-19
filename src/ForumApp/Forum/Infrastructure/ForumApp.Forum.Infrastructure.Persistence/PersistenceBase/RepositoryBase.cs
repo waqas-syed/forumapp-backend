@@ -23,12 +23,14 @@ namespace ForumApp.Forum.Infrastructure.Persistence.PersistenceBase
         public void Add(T entity)
         {
             _forumContext.Set<T>().Add(entity);
+            _forumContext.SaveChanges();
         }
 
         public void Update(T entity)
         {
             _forumContext.Set<T>().Attach(entity);
             _forumContext.Entry(entity).State = EntityState.Modified;
+            _forumContext.SaveChanges();
         }
 
         public void Delete(T entity)

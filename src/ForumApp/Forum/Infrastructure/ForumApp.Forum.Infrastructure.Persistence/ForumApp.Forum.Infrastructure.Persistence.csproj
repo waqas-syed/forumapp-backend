@@ -53,7 +53,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\CommentConfiguration.cs" />
+    <Compile Include="Configurations\PostConfiguration.cs" />
     <Compile Include="Ninject\ForumPersistenceNinjectModule.cs" />
+    <Compile Include="PersistenceBase\DatabaseInitializer.cs" />
     <Compile Include="PersistenceBase\ForumContext.cs" />
     <Compile Include="PersistenceBase\IPostRepository.cs" />
     <Compile Include="PersistenceBase\IRepository.cs" />
@@ -66,6 +69,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\ForumApp.Common\ForumApp.Common.csproj">
+      <Project>{6313c73c-d145-4b92-90c4-dcf2985d81b5}</Project>
+      <Name>ForumApp.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Domain.Model\ForumApp.Forum.Domain.Model\ForumApp.Forum.Domain.Model.csproj">
       <Project>{8159e235-b4cb-49b4-b632-3ade9a7d7bc4}</Project>
       <Name>ForumApp.Forum.Domain.Model</Name>

@@ -16,7 +16,7 @@ namespace ForumApp.Forum.Infrastructure.Persistence.Ninject
         public override void Load()
         {
             Bind<ForumContext>().ToSelf().InRequestScope();
-            Bind<Ipost>().To<PostRepository>().InRequestScope();
+            Bind<IPostRepository>().To<PostRepository>().InRequestScope();
         }
     }
 }

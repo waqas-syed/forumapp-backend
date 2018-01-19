@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ForumApp.Forum.Domain.Model.PostAggregate;
 
 namespace ForumApp.Forum.Infrastructure.Persistence.PersistenceBase
 {
-    public interface IPostRepository :
+    public interface IPostRepository : IRepository<Post>
     {
+        //void AddComment(Comment comment);
     }
 }

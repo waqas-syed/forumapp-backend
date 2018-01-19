@@ -1,5 +1,4 @@
 ﻿using ForumApp.Common.Domain.Model;
-using ForumApp.Forum.Domain.Model.CategoryAggregate;
 using System.Collections.Generic;
 
 namespace ForumApp.Forum.Domain.Model.PostAggregate
@@ -12,19 +11,30 @@ namespace ForumApp.Forum.Domain.Model.PostAggregate
     /// </summary>
     public class Post : Entity
     {
+        // Using private fields for only those attributes who have validations before being assigned new
+        // values
         private string _title;
         private string _description;
         private IList<Comment> _comments;
 
-        public Post(string title, string description)
+        public Post(string title, string description, string category)
         {
             Title = title;
             Description = description;
+            Category = category;
             _comments = new List<Comment>();
         }
 
-        public void AddNewComment(Comment comment)
+        public void Update(string newTitle, string newDescripion, string newCategory)
         {
+            Title = newTitle;
+            Description = newDescripion;
+            Category = newCategory;
+        }
+
+        public void AddNewComment(string authorId, string text)
+        {
+            var comment = new Comment(authorId, text, this);
             _comments.Add(comment);
         }
 
@@ -55,7 +65,12 @@ namespace ForumApp.Forum.Domain.Model.PostAggregate
             }
         }
 
-        public IList<Category> Categories { get; set; }
+        public string Category
+        {
+            get;
+            // Keeping the setter private so no other entity can change this value other than this entity itself
+            private set; 
+        }
 
         public IList<Comment> Comments
         {

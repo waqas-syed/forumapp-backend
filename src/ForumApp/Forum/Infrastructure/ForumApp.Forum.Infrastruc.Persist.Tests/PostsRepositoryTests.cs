@@ -17,18 +17,21 @@ namespace ForumApp.Forum.Infrastruc.Persist.Tests
             _kernel = new StandardKernel();
             _kernel.Load<ForumPersistenceNinjectModule>();
         }
+
         [Test]
         public void SaveNewPostTest_TestsThatANewPosttIsSavedToTheDatbaseCorrectly_VerifiesByRetrievingSavedObject()
         {
             IPostRepository postRepository = _kernel.Get<IPostRepository>();
             string title = "Post # 1";
             string description = "Description of Post # 1";
-            Post post = new Post(title, description);
+            string category = "Category of Post # 1";
+            Post post = new Post(title, description,category);
             postRepository.Add(post);
             var retrievedPost = postRepository.GetById(post.Id);
             Assert.NotNull(retrievedPost);
             Assert.AreEqual(title, retrievedPost.Title);
             Assert.AreEqual(description, retrievedPost.Description);
+            Assert.AreEqual(category, retrievedPost.Category);
         }
 
         [Test]
@@ -37,18 +40,19 @@ namespace ForumApp.Forum.Infrastruc.Persist.Tests
             IPostRepository postRepository = _kernel.Get<IPostRepository>();
             string title = "Post # 1";
             string description = "Description of Post # 1";
-            Post post = new Post(title, description);
+            string category = "Category of Post # 1";
+            Post post = new Post(title, description, category);
             postRepository.Add(post);
             var retrievedPost = postRepository.GetById(post.Id);
             Assert.NotNull(retrievedPost);
             Assert.AreEqual(title, retrievedPost.Title);
             Assert.AreEqual(description, retrievedPost.Description);
-            
+            Assert.AreEqual(category, retrievedPost.Category);
+
             // Now add a new comment
             var authorId = "GandalfTheWhite";
             var text = "I have returned to finish the job";
-            Comment comment = new Comment(authorId, text, post);
-            post.AddNewComment(comment);
+            post.AddNewComment(authorId, text);
             postRepository.Update(post);
             retrievedPost = postRepository.GetById(post.Id);
             Assert.NotNull(retrievedPost);

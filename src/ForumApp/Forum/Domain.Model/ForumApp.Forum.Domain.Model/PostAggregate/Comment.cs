@@ -37,7 +37,8 @@ namespace ForumApp.Forum.Domain.Model.PostAggregate
             }
         }
 
-        public string PostId { get; set; }
-        public virtual Post Post { get; set; }
+        // This is only used by EntityFramework to honor the relationship with Post
+        public string PostId { get; private set; }
+        public Post Post { get; private set; }
     }
 }

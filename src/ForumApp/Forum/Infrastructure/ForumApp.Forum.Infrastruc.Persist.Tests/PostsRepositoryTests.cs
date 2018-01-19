@@ -14,15 +14,9 @@ namespace ForumApp.Forum.Infrastruc.Persist.Tests
         [SetUp]
         public void Setup()
         {
-            /*var connection = ConfigurationManager.AppSettings.Get("DefaultConnection");
-            _databaseUtility = new DatabaseUtility(connection);
-            _databaseUtility.Create();*/
             _kernel = new StandardKernel();
             _kernel.Load<ForumPersistenceNinjectModule>();
-            //NhConnectionDecipherService.SetupDecipheredConnectionString();
-            //_databaseUtility.Populate();
         }
-
         [Test]
         public void SaveNewPostTest_TestsThatANewPosttIsSavedToTheDatbaseCorrectly_VerifiesByRetrievingSavedObject()
         {

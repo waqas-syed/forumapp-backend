@@ -20,12 +20,12 @@ namespace ForumApp.Forum.Domain.Model.PostAggregate
         {
             Title = title;
             Description = description;
-            Comments = new List<Comment>();
+            _comments = new List<Comment>();
         }
 
         public void AddNewComment(Comment comment)
         {
-            Comments.Add(comment);
+            _comments.Add(comment);
         }
 
         public string Title
@@ -59,13 +59,8 @@ namespace ForumApp.Forum.Domain.Model.PostAggregate
 
         public IList<Comment> Comments
         {
-            // We only show the Read-Only collection to the world outside of this entity, so that no one can
-            // change it, thus honoring the Single Responsiblity principle
-            //get { return new ReadOnlyCollection<Comment>(_comments); }
-            get;
-            set;
+            get { return _comments; }
+            private set { _comments = value; } 
         }
-
-        public bool Test { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using ForumApp.Forum.Application.ApplicationServices.Commands;
+using ForumApp.Forum.Application.ApplicationServices.Representations;
 using ForumApp.Forum.Domain.Model.PostAggregate;
 
 namespace ForumApp.Forum.Application.ApplicationServices
@@ -30,14 +31,14 @@ namespace ForumApp.Forum.Application.ApplicationServices
         /// Get all the posts
         /// </summary>
         /// <returns></returns>
-        IList<Post> GetAllPosts();
+        IList<PostRepresentation> GetAllPosts();
 
         /// <summary>
         /// Get a Post by its ID
         /// </summary>
         /// <param name="postId"></param>
         /// <returns></returns>
-        Post GetPostById(string postId);
+        PostRepresentation GetPostById(string postId);
 
         /// <summary>
         /// Add a new Comment to a Post

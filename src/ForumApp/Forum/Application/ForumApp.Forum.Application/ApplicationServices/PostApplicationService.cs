@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ForumApp.Forum.Application.ApplicationServices.Commands;
+using ForumApp.Forum.Application.ApplicationServices.Representations;
 using ForumApp.Forum.Domain.Model.PostAggregate;
 using ForumApp.Forum.Infrastructure.Persistence.PersistenceBase;
 
@@ -64,9 +65,9 @@ namespace ForumApp.Forum.Application.ApplicationServices
         /// Get all the posts
         /// </summary>
         /// <returns></returns>
-        public IList<Post> GetAllPosts()
+        public IList<PostRepresentation> GetAllPosts()
         {
-            return _postRepository.GetAll();
+            return ConvertPostsToRepresentations(_postRepository.GetAll());
         }
 
         /// <summary>
@@ -74,9 +75,14 @@ namespace ForumApp.Forum.Application.ApplicationServices
         /// </summary>
         /// <param name="postId"></param>
         /// <returns></returns>
-        public Post GetPostById(string postId)
+        public PostRepresentation GetPostById(string postId)
         {
-            return _postRepository.GetById(postId);
+            var post = _postRepository.GetById(postId);
+            if (post == null)
+            {
+                throw new NullReferenceException(string.Format("Could not find a Post with ID:{0}", postId));
+            }
+            return ConvertPostToRepresentation(post);
         }
 
         /// <summary>
@@ -92,5 +98,41 @@ namespace ForumApp.Forum.Application.ApplicationServices
             }
             post.AddNewComment(addCommentCommand.AuthorId, addCommentCommand.Text);
         }
+
+        #region Helper Methods
+
+        private IList<PostRepresentation> ConvertPostsToRepresentations(IList<Post> posts)
+        {
+            IList<PostRepresentation> postRepresentations = new List<PostRepresentation>();
+            foreach (var post in posts)
+            {
+                postRepresentations.Add(ConvertPostToRepresentation(post));
+            }
+            return postRepresentations;
+        }
+
+        private PostRepresentation ConvertPostToRepresentation(Post post)
+        {
+            IList<CommentRepresentation> commentRepresentations = new List<CommentRepresentation>();
+            foreach (var currentComment in post.Comments)
+            {
+                commentRepresentations.Add(new CommentRepresentation()
+                {
+                    AuthorId = currentComment.AuthorId,
+                    PostId = currentComment.PostId,
+                    Text = currentComment.Text
+                });
+            }
+            return new PostRepresentation()
+            {
+                Id = post.Id,
+                Category = post.Category,
+                Description = post.Description,
+                Title = post.Title,
+                Comments = commentRepresentations
+            };
+        }
+
+        #endregion Helper Methods
     }
 }

@@ -36,6 +36,7 @@ namespace ForumApp.Forum.Infrastructure.Persistence.PersistenceBase
         public void Delete(T entity)
         {
             _forumContext.Set<T>().Remove(entity);
+            _forumContext.SaveChanges();
         }
 
         public IList<T> GetAll()

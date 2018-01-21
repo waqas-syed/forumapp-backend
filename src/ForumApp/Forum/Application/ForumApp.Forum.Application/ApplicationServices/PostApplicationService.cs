@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ForumApp.Forum.Application.ApplicationServices.Commands;
 using ForumApp.Forum.Application.ApplicationServices.Representations;
 using ForumApp.Forum.Domain.Model.PostAggregate;
@@ -78,11 +79,11 @@ namespace ForumApp.Forum.Application.ApplicationServices
         public PostRepresentation GetPostById(string postId)
         {
             var post = _postRepository.GetById(postId);
-            if (post == null)
+            if (post != null)
             {
-                throw new NullReferenceException(string.Format("Could not find a Post with ID:{0}", postId));
+                return ConvertPostToRepresentation(post);
             }
-            return ConvertPostToRepresentation(post);
+            return null;
         }
 
         /// <summary>
@@ -97,6 +98,7 @@ namespace ForumApp.Forum.Application.ApplicationServices
                 throw new NullReferenceException(string.Format("Could not find a Post with ID:{0}", addCommentCommand.PostId));
             }
             post.AddNewComment(addCommentCommand.AuthorId, addCommentCommand.Text);
+            _postRepository.Update(post);
         }
 
         #region Helper Methods
@@ -114,14 +116,17 @@ namespace ForumApp.Forum.Application.ApplicationServices
         private PostRepresentation ConvertPostToRepresentation(Post post)
         {
             IList<CommentRepresentation> commentRepresentations = new List<CommentRepresentation>();
-            foreach (var currentComment in post.Comments)
+            if (post.Comments != null && post.Comments.Any())
             {
-                commentRepresentations.Add(new CommentRepresentation()
+                foreach (var currentComment in post.Comments)
                 {
-                    AuthorId = currentComment.AuthorId,
-                    PostId = currentComment.PostId,
-                    Text = currentComment.Text
-                });
+                    commentRepresentations.Add(new CommentRepresentation()
+                    {
+                        AuthorId = currentComment.AuthorId,
+                        PostId = currentComment.PostId,
+                        Text = currentComment.Text
+                    });
+                }
             }
             return new PostRepresentation()
             {

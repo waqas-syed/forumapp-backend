@@ -17,6 +17,11 @@ namespace ForumApp.Forum.Domain.Model.PostAggregate
         private string _description;
         private IList<Comment> _comments;
 
+        public Post()
+        {
+            
+        }
+
         public Post(string title, string description, string category)
         {
             Title = title;

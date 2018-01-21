@@ -9,7 +9,6 @@ namespace ForumApp.Identity.Infrastructure.Persistence.PersistenceBase
     {
         public IdentityAndAccessContext() : base("DefaultConnection")
         {
-            Database.SetInitializer(new MySqlDatabaseInitializer());
         }
     }
 }

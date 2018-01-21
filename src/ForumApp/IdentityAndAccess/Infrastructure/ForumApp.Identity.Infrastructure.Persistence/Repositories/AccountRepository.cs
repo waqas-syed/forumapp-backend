@@ -22,11 +22,10 @@ namespace ForumApp.Identity.Infrastructure.Persistence.Repositories
         /// <summary>
         /// Register a new user
         /// </summary>
-        /// <param name="fullName"></param>
         /// <param name="email"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public IdentityResult RegisterUser(string fullName, string email, string password)
+        public IdentityResult RegisterUser(string email, string password)
         {
             // Assign email to the uername property, as we will use email only for authentication as it is a more 
             // clean procedure

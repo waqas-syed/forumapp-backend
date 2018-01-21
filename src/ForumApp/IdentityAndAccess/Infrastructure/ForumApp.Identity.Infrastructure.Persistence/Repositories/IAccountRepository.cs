@@ -11,11 +11,10 @@ namespace ForumApp.Identity.Infrastructure.Persistence.Repositories
         /// <summary>
         /// Register a new user into our system
         /// </summary>
-        /// <param name="fullName"></param>
         /// <param name="email"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        IdentityResult RegisterUser(string fullName, string email, string password);
+        IdentityResult RegisterUser(string email, string password);
 
         /// <summary>
         /// Get a user by their email

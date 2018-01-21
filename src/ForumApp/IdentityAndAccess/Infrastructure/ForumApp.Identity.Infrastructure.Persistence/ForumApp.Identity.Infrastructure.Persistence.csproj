@@ -81,6 +81,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IdentityPersistenceNinjectModule.cs" />
     <Compile Include="PersistenceBase\IdentityAndAccessContext.cs" />
     <Compile Include="PersistenceBase\IdentityDatabaseInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

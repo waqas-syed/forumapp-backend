@@ -38,6 +38,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -49,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Domain.Model\Assertion.cs" />
     <Compile Include="Domain.Model\Entity.cs" />
+    <Compile Include="Global\Constants.cs" />
     <Compile Include="Persistence\BaseContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

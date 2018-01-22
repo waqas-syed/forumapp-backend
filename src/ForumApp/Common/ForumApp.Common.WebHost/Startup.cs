@@ -51,11 +51,10 @@ namespace ForumApp.Common.WebHost
             {
                 AllowAnyHeader = true,
                 AllowAnyMethod = true,
-                SupportsCredentials = true
+                SupportsCredentials = true,
+                AllowAnyOrigin = true
             };
-
-            corsPolicy.Origins.Add(Global.Constants.FrontendUrl);
-
+            
             app.UseCors(new CorsOptions()
             {
                 PolicyProvider = new CorsPolicyProvider()

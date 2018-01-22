@@ -15,6 +15,7 @@ namespace ForumApp.Identity.Infrastructure.Persistence
         public override void Load()
         {
             Bind<IdentityAndAccessContext>().ToSelf().InRequestScope();
+            Bind(typeof(IUserStore<IdentityUser>)).To<UserStore<IdentityUser>>().InRequestScope();
             Bind(typeof(UserManager<IdentityUser>)).ToSelf().InRequestScope();
             Bind<IAccountRepository>().To<AccountRepository>().InRequestScope();
         }

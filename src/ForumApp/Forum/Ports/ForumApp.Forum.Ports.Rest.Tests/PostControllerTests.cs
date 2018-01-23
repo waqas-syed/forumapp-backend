@@ -79,7 +79,7 @@ namespace ForumApp.Forum.Ports.Rest.Tests
             var text1 = "You shall not pass";
             AddCommentCommand addCommentCommand = new AddCommentCommand()
             {
-                AuthorId = authorId1,
+                AuthorEmail = authorId1,
                 PostId = postId,
                 Text = text1
             };
@@ -88,7 +88,7 @@ namespace ForumApp.Forum.Ports.Rest.Tests
             var text2 = "I have returned to finish the job";
             AddCommentCommand addCommentCommand2 = new AddCommentCommand()
             {
-                AuthorId = authorId2,
+                AuthorEmail = authorId2,
                 PostId = postId,
                 Text = text2
             };

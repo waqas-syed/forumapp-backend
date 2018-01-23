@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Cors;
-using System.Web.Http;
-using ForumApp.Common.WebHost.Providers;
+﻿using ForumApp.Common.WebHost.Providers;
 using ForumApp.Forum.Application.Ninject;
 using ForumApp.Forum.Infrastructure.Persistence.Ninject;
 using ForumApp.Forum.Ports.Rest.Ninject;
 using ForumApp.Identity.Application.Ninject;
 using ForumApp.Identity.Infrastructure.Persistence;
 using ForumApp.Identity.Ports.Rest.Ninject;
-using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security.OAuth;
@@ -20,6 +12,10 @@ using Ninject;
 using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi.OwinHost;
 using Owin;
+using System;
+using System.Threading.Tasks;
+using System.Web.Cors;
+using System.Web.Http;
 
 [assembly: OwinStartup(typeof(ForumApp.Common.WebHost.Startup))]
 namespace ForumApp.Common.WebHost

@@ -19,16 +19,20 @@ namespace ForumApp.Forum.Application.ApplicationServices
         {
             _postRepository = postRepository;
         }
-        
+
         /// <summary>
         /// Save a new Post
         /// </summary>
         /// <param name="createPostCommand"></param>
-        public string SaveNewPost(CreatePostCommand createPostCommand)
+        /// <param name="currentUserEmail"></param>
+        public string SaveNewPost(CreatePostCommand createPostCommand, string currentUserEmail)
         {
+            if (string.IsNullOrWhiteSpace(currentUserEmail))
+            {
+                throw new NullReferenceException("Couldn't verify current User's identity");
+            }
             var post = new Post(createPostCommand.Title,
-                createPostCommand.Description,
-                createPostCommand.Category);
+                createPostCommand.Description, createPostCommand.Category, currentUserEmail);
             _postRepository.Add(post);
             return post.Id;
         }
@@ -37,8 +41,12 @@ namespace ForumApp.Forum.Application.ApplicationServices
         /// Update an existing post
         /// </summary>
         /// <param name="updatepostCommand"></param>
-        public void UpdatePost(UpdatePostCommand updatepostCommand)
+        public void UpdatePost(UpdatePostCommand updatepostCommand, string currentUserEmail)
         {
+            if (string.IsNullOrWhiteSpace(currentUserEmail))
+            {
+                throw new NullReferenceException("Couldn't verify current User's identity");
+            }
             var post = _postRepository.GetById(updatepostCommand.Id);
             if (post == null)
             {
@@ -52,8 +60,12 @@ namespace ForumApp.Forum.Application.ApplicationServices
         /// Delete a post
         /// </summary>
         /// <param name="postId"></param>
-        public void DeletePost(string postId)
+        public void DeletePost(string postId, string currentUserEmail)
         {
+            if (string.IsNullOrWhiteSpace(currentUserEmail))
+            {
+                throw new NullReferenceException("Couldn't verify current User's identity");
+            }
             var post = _postRepository.GetById(postId);
             if (post == null)
             {
@@ -90,14 +102,19 @@ namespace ForumApp.Forum.Application.ApplicationServices
         /// Add a new Comment to a Post
         /// </summary>
         /// <param name="addCommentCommand"></param>
-        public void AddCommentToPost(AddCommentCommand addCommentCommand)
+        /// <param name="currentUserEmail"></param>
+        public void AddCommentToPost(AddCommentCommand addCommentCommand, string currentUserEmail)
         {
+            if (string.IsNullOrWhiteSpace(currentUserEmail))
+            {
+                throw new NullReferenceException("Couldn't verify current User's identity");
+            }
             var post = _postRepository.GetById(addCommentCommand.PostId);
             if (post == null)
             {
                 throw new NullReferenceException(string.Format("Could not find a Post with ID:{0}", addCommentCommand.PostId));
             }
-            post.AddNewComment(addCommentCommand.AuthorId, addCommentCommand.Text);
+            post.AddNewComment(addCommentCommand.AuthorEmail, addCommentCommand.Text);
             _postRepository.Update(post);
         }
 
@@ -122,7 +139,7 @@ namespace ForumApp.Forum.Application.ApplicationServices
                 {
                     commentRepresentations.Add(new CommentRepresentation()
                     {
-                        AuthorId = currentComment.AuthorId,
+                        AuthorId = currentComment.AuthorEmail,
                         PostId = currentComment.PostId,
                         Text = currentComment.Text
                     });

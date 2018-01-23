@@ -10,14 +10,14 @@ namespace ForumApp.Forum.Domain.Model.PostAggregate
         private string _authorId;
         private string _text;
 
-        public Comment(string authorId, string text, Post post)
+        public Comment(string authorEmail, string text, Post post)
         {
-            AuthorId = authorId;
+            AuthorEmail = authorEmail;
             Text = text;
             Post = post;
         }
 
-        public string AuthorId
+        public string AuthorEmail
         {
             get { return _authorId; }
             private set

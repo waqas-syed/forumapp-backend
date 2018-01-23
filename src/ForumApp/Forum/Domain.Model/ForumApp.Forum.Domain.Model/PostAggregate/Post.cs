@@ -15,6 +15,7 @@ namespace ForumApp.Forum.Domain.Model.PostAggregate
         // values
         private string _title;
         private string _description;
+        private string _posterEmail;
         private IList<Comment> _comments;
 
         public Post()
@@ -22,11 +23,12 @@ namespace ForumApp.Forum.Domain.Model.PostAggregate
             
         }
 
-        public Post(string title, string description, string category)
+        public Post(string title, string description, string category, string posterEmail)
         {
             Title = title;
             Description = description;
             Category = category;
+            PosterEmail = posterEmail;
             _comments = new List<Comment>();
         }
 
@@ -75,6 +77,18 @@ namespace ForumApp.Forum.Domain.Model.PostAggregate
             get;
             // Keeping the setter private so no other entity can change this value other than this entity itself
             private set; 
+        }
+
+        public string PosterEmail
+        {
+            get { return _posterEmail; }
+            // Keeping the setter private so no other entity can change this value other than this entity itself
+            private set
+            {
+                // Only assign when the incoming value is not null or empty, otherwise raise an exception
+                Assertion.AssertStringNotNullorEmpty(value);
+                _posterEmail = value;
+            }
         }
 
         public IList<Comment> Comments

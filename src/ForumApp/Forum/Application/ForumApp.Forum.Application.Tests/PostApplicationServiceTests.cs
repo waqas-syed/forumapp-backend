@@ -28,12 +28,14 @@ namespace ForumApp.Forum.Application.Tests
             string title = "Post # 1";
             string description = "Description of Post # 1";
             string category = "Category of Post # 1";
+            string email = "w@12345-1.com";
             var createPostCommand = new CreatePostCommand();
             createPostCommand.Title = title;
             createPostCommand.Description = description;
             createPostCommand.Category = category;
+            createPostCommand.Email = email;
 
-            var postId = postApplicationService.SaveNewPost(createPostCommand);
+            var postId = postApplicationService.SaveNewPost(createPostCommand, email);
             var retreivedPost = postApplicationService.GetPostById(postId);
             Assert.NotNull(retreivedPost);
             Assert.AreEqual(title, retreivedPost.Title);
@@ -49,12 +51,14 @@ namespace ForumApp.Forum.Application.Tests
             string title = "Post # 1";
             string description = "Description of Post # 1";
             string category = "Category of Post # 1";
+            string email = "wbgta@12345-1.com";
             var createPostCommand = new CreatePostCommand();
             createPostCommand.Title = title;
             createPostCommand.Description = description;
             createPostCommand.Category = category;
+            createPostCommand.Email = email;
 
-            var postId = postApplicationService.SaveNewPost(createPostCommand);
+            var postId = postApplicationService.SaveNewPost(createPostCommand, email);
             var retreivedPost = postApplicationService.GetPostById(postId);
             Assert.NotNull(retreivedPost);
             Assert.AreEqual(title, retreivedPost.Title);
@@ -63,21 +67,23 @@ namespace ForumApp.Forum.Application.Tests
 
             var authorId1 = "GandalfTheWhite";
             var text1 = "I have returned to finish the job";
+            string emailComment1 = "welfgta@12345-1.com";
             postApplicationService.AddCommentToPost(new AddCommentCommand()
             {
-                AuthorId = authorId1,
+                AuthorEmail = emailComment1,
                 Text = text1,
                 PostId = postId
-            });
+            }, emailComment1);
 
             var authorId2 = "Aragorn";
             var text2 = "I have returned to my throne";
+            string emailComment2 = "welfgta@12345-1.com";
             postApplicationService.AddCommentToPost(new AddCommentCommand()
             {
-                AuthorId = authorId2,
+                AuthorEmail = authorId2,
                 Text = text2,
                 PostId = postId
-            });
+            }, emailComment2);
 
             retreivedPost = postApplicationService.GetPostById(postId);
             Assert.NotNull(retreivedPost);

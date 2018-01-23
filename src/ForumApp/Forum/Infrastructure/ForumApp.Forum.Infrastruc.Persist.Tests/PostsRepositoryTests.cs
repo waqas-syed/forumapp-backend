@@ -25,7 +25,8 @@ namespace ForumApp.Forum.Infrastruc.Persist.Tests
             string title = "Post # 1";
             string description = "Description of Post # 1";
             string category = "Category of Post # 1";
-            Post post = new Post(title, description,category);
+            string email = "wgpat@12345-1.com";
+            Post post = new Post(title, description, category, email);
             postRepository.Add(post);
             var retrievedPost = postRepository.GetById(post.Id);
             Assert.NotNull(retrievedPost);
@@ -41,7 +42,8 @@ namespace ForumApp.Forum.Infrastruc.Persist.Tests
             string title = "Post # 1";
             string description = "Description of Post # 1";
             string category = "Category of Post # 1";
-            Post post = new Post(title, description, category);
+            string email = "wgpat@12345-1.com";
+            Post post = new Post(title, description, category, email);
             postRepository.Add(post);
             var retrievedPost = postRepository.GetById(post.Id);
             Assert.NotNull(retrievedPost);
@@ -57,7 +59,7 @@ namespace ForumApp.Forum.Infrastruc.Persist.Tests
             retrievedPost = postRepository.GetById(post.Id);
             Assert.NotNull(retrievedPost);
             Assert.AreEqual(1, retrievedPost.Comments.Count);
-            Assert.AreEqual(authorId, retrievedPost.Comments[0].AuthorId);
+            Assert.AreEqual(authorId, retrievedPost.Comments[0].AuthorEmail);
             Assert.AreEqual(text, retrievedPost.Comments[0].Text);
         }
     }

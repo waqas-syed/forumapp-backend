@@ -10,7 +10,7 @@ namespace ForumApp.Forum.Application.ApplicationServices.Commands
     public class AddCommentCommand
     {
         public string PostId { get; set; }
-        public string AuthorId { get; set; }
+        public string AuthorEmail { get; set; }
         public string Text { get; set; }
     }
 }

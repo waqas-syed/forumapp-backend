@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationServices\CategoryApplicationService.cs" />
+    <Compile Include="ApplicationServices\Commands\AddCommentCommand.cs" />
     <Compile Include="ApplicationServices\Commands\CreateCategoryCommand.cs" />
     <Compile Include="ApplicationServices\Commands\CreatePostCommand.cs" />
     <Compile Include="ApplicationServices\Commands\UpdatePostCommand.cs" />

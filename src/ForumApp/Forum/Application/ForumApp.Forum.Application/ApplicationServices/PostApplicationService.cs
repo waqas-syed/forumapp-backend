@@ -126,7 +126,7 @@ namespace ForumApp.Forum.Application.ApplicationServices
             {
                 throw new NullReferenceException("Couldn't verify current User's identity");
             }
-            var post = _postRepository.GetById(addCommentCommand.PostId);
+            var post = _postRepository.GetPostById(addCommentCommand.PostId);
             if (post == null)
             {
                 throw new NullReferenceException(string.Format("Could not find a Post with ID:{0}", addCommentCommand.PostId));
@@ -173,6 +173,7 @@ namespace ForumApp.Forum.Application.ApplicationServices
                 Category = post.Category,
                 Description = post.Description,
                 Title = post.Title,
+                PosterEmail = post.PosterEmail,
                 Comments = commentRepresentations
             };
         }

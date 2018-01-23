@@ -13,6 +13,8 @@ namespace ForumApp.Forum.Infrastructure.Persistence.PersistenceBase
         public ForumContext() : base("DefaultConnection")
         {
             //Database.SetInitializer(new DatabaseInitializer());
+            Configuration.ProxyCreationEnabled = true;
+            Configuration.LazyLoadingEnabled = true;
         }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Category> Categories { get; set; }

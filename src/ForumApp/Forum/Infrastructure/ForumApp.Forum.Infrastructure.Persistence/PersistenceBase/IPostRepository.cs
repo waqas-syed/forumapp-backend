@@ -5,5 +5,6 @@ namespace ForumApp.Forum.Infrastructure.Persistence.PersistenceBase
     public interface IPostRepository : IRepository<Post>
     {
         //void AddComment(Comment comment);
+        Post GetPostById(string postId);
     }
 }

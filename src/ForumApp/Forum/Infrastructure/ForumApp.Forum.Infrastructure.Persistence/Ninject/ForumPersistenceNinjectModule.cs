@@ -17,6 +17,7 @@ namespace ForumApp.Forum.Infrastructure.Persistence.Ninject
         {
             Bind<ForumContext>().ToSelf().InRequestScope();
             Bind<IPostRepository>().To<PostRepository>().InRequestScope();
+            Bind<ICategoryRepository>().To<CategoryRepository>().InRequestScope();
         }
     }
 }

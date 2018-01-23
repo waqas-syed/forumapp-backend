@@ -3,7 +3,6 @@ using ForumApp.Forum.Application.ApplicationServices.Commands;
 using Newtonsoft.Json;
 using System;
 using System.Security.Claims;
-using System.Security.Principal;
 using System.Web.Http;
 
 namespace ForumApp.Forum.Ports.Rest.Controllers
@@ -130,7 +129,7 @@ namespace ForumApp.Forum.Ports.Rest.Controllers
         }
 
         #endregion
-
+        
         #region Private helper Methods
 
         /// <summary>

@@ -54,11 +54,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationServices\Commands\AddCommentCommand.cs" />
+    <Compile Include="ApplicationServices\CategoryApplicationService.cs" />
+    <Compile Include="ApplicationServices\Commands\CreateCategoryCommand.cs" />
     <Compile Include="ApplicationServices\Commands\CreatePostCommand.cs" />
     <Compile Include="ApplicationServices\Commands\UpdatePostCommand.cs" />
+    <Compile Include="ApplicationServices\ICategoryApplicationService.cs" />
     <Compile Include="ApplicationServices\PostApplicationService.cs" />
     <Compile Include="ApplicationServices\IPostApplicationService.cs" />
+    <Compile Include="ApplicationServices\Representations\CategoryRepresentation.cs" />
     <Compile Include="ApplicationServices\Representations\CommentRepresentation.cs" />
     <Compile Include="ApplicationServices\Representations\PostRepresentation.cs" />
     <Compile Include="Class1.cs" />

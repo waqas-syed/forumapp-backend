@@ -29,7 +29,7 @@ namespace ForumApp.Forum.Domain.Model.PostAggregate
             Description = description;
             Category = category;
             PosterEmail = posterEmail;
-            _comments = new List<Comment>();
+            Comments = new List<Comment>();
         }
 
         public void Update(string newTitle, string newDescripion, string newCategory)
@@ -42,7 +42,7 @@ namespace ForumApp.Forum.Domain.Model.PostAggregate
         public void AddNewComment(string authorId, string text)
         {
             var comment = new Comment(authorId, text, this);
-            _comments.Add(comment);
+            Comments.Add(comment);
         }
 
         public string Title
@@ -91,10 +91,12 @@ namespace ForumApp.Forum.Domain.Model.PostAggregate
             }
         }
 
-        public IList<Comment> Comments
+        public virtual IList<Comment> Comments
         {
-            get { return _comments; }
-            private set { _comments = value; } 
+            /*get { return _comments; }
+            private set { _comments = value; } */
+            get;
+            set;
         }
     }
 }

@@ -10,6 +10,11 @@ namespace ForumApp.Forum.Domain.Model.PostAggregate
         private string _authorId;
         private string _text;
 
+        public Comment()
+        {
+            
+        }
+
         public Comment(string authorEmail, string text, Post post)
         {
             AuthorEmail = authorEmail;
@@ -39,6 +44,6 @@ namespace ForumApp.Forum.Domain.Model.PostAggregate
 
         // This is only used by EntityFramework to honor the relationship with Post
         public string PostId { get; private set; }
-        public Post Post { get; private set; }
+        public virtual Post Post { get; private set; }
     }
 }

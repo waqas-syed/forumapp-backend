@@ -58,10 +58,12 @@
     <Compile Include="Ninject\ForumPersistenceNinjectModule.cs" />
     <Compile Include="PersistenceBase\DatabaseInitializer.cs" />
     <Compile Include="PersistenceBase\ForumContext.cs" />
+    <Compile Include="PersistenceBase\ICategoryRepository.cs" />
     <Compile Include="PersistenceBase\IPostRepository.cs" />
     <Compile Include="PersistenceBase\IRepository.cs" />
     <Compile Include="PersistenceBase\RepositoryBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\PostRepository.cs" />
   </ItemGroup>
   <ItemGroup>

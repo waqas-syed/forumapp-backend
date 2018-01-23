@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using ForumApp.Forum.Domain.Model.CategoryAggregate;
 using ForumApp.Forum.Domain.Model.PostAggregate;
-using ForumApp.Forum.Infrastructure.Persistence.Configurations;
+using ForumApp.Forum.Infrastructure.Persistence.FluentConfigurations;
 
 namespace ForumApp.Forum.Infrastructure.Persistence.PersistenceBase
 {

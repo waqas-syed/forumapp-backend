@@ -9,6 +9,7 @@ namespace ForumApp.Forum.Application.Ninject
         public override void Load()
         {
             Bind<IPostApplicationService>().To<PostApplicationService>().InRequestScope();
+            Bind<ICategoryApplicationService>().To<CategoryApplicationService>().InRequestScope();
         }
     }
 }

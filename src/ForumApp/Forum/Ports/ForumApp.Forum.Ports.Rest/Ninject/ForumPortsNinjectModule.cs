@@ -8,6 +8,7 @@ namespace ForumApp.Forum.Ports.Rest.Ninject
         public override void Load()
         {
             Bind<PostController>().ToSelf().InTransientScope();
+            Bind<CategoryController>().ToSelf().InTransientScope();
         }
     }
 }

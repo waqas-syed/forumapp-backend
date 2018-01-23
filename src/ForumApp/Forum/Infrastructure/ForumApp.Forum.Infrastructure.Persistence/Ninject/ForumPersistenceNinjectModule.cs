@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ForumApp.Forum.Infrastructure.Persistence.PersistenceBase;
+﻿using ForumApp.Forum.Infrastructure.Persistence.PersistenceBase;
 using ForumApp.Forum.Infrastructure.Persistence.Repositories;
 using Ninject.Modules;
 using Ninject.Web.Common;

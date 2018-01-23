@@ -1,39 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ForumApp.Forum.Application.ApplicationServices;
+using System;
 using System.Web.Http;
-using ForumApp.Forum.Application.ApplicationServices.Commands;
-using Newtonsoft.Json;
 
 namespace ForumApp.Forum.Ports.Rest.Controllers
 {
     /// <summary>
     /// Handles all API operations related to Categories
     /// </summary>
+    [RoutePrefix("v1")]
     public class CategoryController : ApiController
     {
-        [Route("post")]
-        [HttpPost]
+        private ICategoryApplicationService _categoryApplicationService;
+
+        public CategoryController(ICategoryApplicationService categoryApplicationService)
+        {
+            _categoryApplicationService = categoryApplicationService;
+        }
+
+        
+        [Route("category")]
+        [HttpGet]
         //[Authorize]
-        public IHttpActionResult Post([FromBody]object createPostCommandJson)
+        public IHttpActionResult Get()
         {
             try
             {
-                // Null reference check
-                if (createPostCommandJson != null)
-                {
-                    var createPostCommand = JsonConvert.DeserializeObject<CreatePostCommand>(createPostCommandJson.ToString());
-                    // Save the new Post
-                    return Ok(_categoryApplicationService.SaveNewPost(createPostCommand, GetEmailFromClaims()));
-                }
+                return Ok(_categoryApplicationService.GetAllCategories());
             }
             catch (Exception exception)
             {
                 return InternalServerError();
             }
-            return BadRequest();
         }
     }
 }

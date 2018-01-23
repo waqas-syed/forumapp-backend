@@ -22,7 +22,7 @@ namespace ForumApp.Forum.Ports.Rest.Controllers
 
         [Route("post")]
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public IHttpActionResult Post([FromBody]object createPostCommandJson)
         {
             try
@@ -44,7 +44,7 @@ namespace ForumApp.Forum.Ports.Rest.Controllers
 
         [Route("post")]
         [HttpPut]
-        //[Authorize]
+        [Authorize]
         [AcceptVerbs(new string[] { "OPTIONS", "PUT" })]
         public IHttpActionResult Put([FromBody] Object updatePostCommandJson)
         {
@@ -107,7 +107,7 @@ namespace ForumApp.Forum.Ports.Rest.Controllers
 
         [Route("post/{id}/comment")]
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public IHttpActionResult PostComment([FromBody]object addCommentCommandJson)
         {
             try

@@ -53,8 +53,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configurations\CommentConfiguration.cs" />
-    <Compile Include="Configurations\PostConfiguration.cs" />
+    <Compile Include="FluentConfigurations\CommentConfiguration.cs" />
+    <Compile Include="FluentConfigurations\PostConfiguration.cs" />
+    <Compile Include="Migrations\201801231436233_Initial.cs" />
+    <Compile Include="Migrations\201801231436233_Initial.Designer.cs">
+      <DependentUpon>201801231436233_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Ninject\ForumPersistenceNinjectModule.cs" />
     <Compile Include="PersistenceBase\DatabaseInitializer.cs" />
     <Compile Include="PersistenceBase\ForumContext.cs" />
@@ -80,6 +85,10 @@
       <Name>ForumApp.Forum.Domain.Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201801231436233_Initial.resx">
+      <DependentUpon>201801231436233_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,7 +1,7 @@
-﻿using ForumApp.Forum.Domain.Model.PostAggregate;
-using System.Data.Entity.ModelConfiguration;
+﻿using System.Data.Entity.ModelConfiguration;
+using ForumApp.Forum.Domain.Model.PostAggregate;
 
-namespace ForumApp.Forum.Infrastructure.Persistence.Configurations
+namespace ForumApp.Forum.Infrastructure.Persistence.FluentConfigurations
 {
     public class CommentConfiguration : EntityTypeConfiguration<Comment>
     {

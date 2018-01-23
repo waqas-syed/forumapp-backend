@@ -32,6 +32,7 @@ namespace ForumApp.Common.WebHost.Providers
                 return;
             }
             var claims = new ClaimsIdentity(context.Options.AuthenticationType);
+            claims.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
             claims.AddClaim(new Claim("sub", context.UserName));
             claims.AddClaim(new Claim("role", "user"));
 

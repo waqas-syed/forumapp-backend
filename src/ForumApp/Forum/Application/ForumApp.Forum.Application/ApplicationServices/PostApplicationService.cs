@@ -31,6 +31,11 @@ namespace ForumApp.Forum.Application.ApplicationServices
             {
                 throw new NullReferenceException("Couldn't verify current User's identity");
             }
+            // If the given email is not equal to the current user's email, do not proceed
+            if (!currentUserEmail.Equals(createPostCommand.Email))
+            {
+                throw new InvalidOperationException("Email verification mismatch. Aborting operation");
+            }
             var post = new Post(createPostCommand.Title,
                 createPostCommand.Description, createPostCommand.Category, currentUserEmail);
             _postRepository.Add(post);
@@ -41,6 +46,7 @@ namespace ForumApp.Forum.Application.ApplicationServices
         /// Update an existing post
         /// </summary>
         /// <param name="updatepostCommand"></param>
+        /// <param name="currentUserEmail"></param>
         public void UpdatePost(UpdatePostCommand updatepostCommand, string currentUserEmail)
         {
             if (string.IsNullOrWhiteSpace(currentUserEmail))
@@ -52,6 +58,11 @@ namespace ForumApp.Forum.Application.ApplicationServices
             {
                 throw new NullReferenceException(string.Format("Could not find a Post with ID:{0}", updatepostCommand.Id));
             }
+            // If the Post's email is not equal to the current user's email, do not proceed
+            if (!currentUserEmail.Equals(post.PosterEmail))
+            {
+                throw new InvalidOperationException("Email verification mismatch. Aborting operation");
+            }
             post.Update(updatepostCommand.Title, updatepostCommand.Description, updatepostCommand.Category);
             _postRepository.Update(post);
         }
@@ -60,6 +71,7 @@ namespace ForumApp.Forum.Application.ApplicationServices
         /// Delete a post
         /// </summary>
         /// <param name="postId"></param>
+        /// <param name="currentUserEmail"></param>
         public void DeletePost(string postId, string currentUserEmail)
         {
             if (string.IsNullOrWhiteSpace(currentUserEmail))
@@ -70,6 +82,11 @@ namespace ForumApp.Forum.Application.ApplicationServices
             if (post == null)
             {
                 throw new NullReferenceException(string.Format("Could not find a Post with ID:{0}", postId));
+            }
+            // If the Post's email is not equal to the current user's email, do not proceed
+            if (!currentUserEmail.Equals(post.PosterEmail))
+            {
+                throw new InvalidOperationException("Email verification mismatch. Aborting operation");
             }
             _postRepository.Delete(post);
         }
@@ -114,6 +131,11 @@ namespace ForumApp.Forum.Application.ApplicationServices
             {
                 throw new NullReferenceException(string.Format("Could not find a Post with ID:{0}", addCommentCommand.PostId));
             }
+            // If the Commenter's email is not equal to the current user's email, do not proceed
+            if (!currentUserEmail.Equals(addCommentCommand.AuthorEmail))
+            {
+                throw new InvalidOperationException("Email verification mismatch. Aborting operation");
+            }
             post.AddNewComment(addCommentCommand.AuthorEmail, addCommentCommand.Text);
             _postRepository.Update(post);
         }
@@ -139,7 +161,7 @@ namespace ForumApp.Forum.Application.ApplicationServices
                 {
                     commentRepresentations.Add(new CommentRepresentation()
                     {
-                        AuthorId = currentComment.AuthorEmail,
+                        AuthorEmail = currentComment.AuthorEmail,
                         PostId = currentComment.PostId,
                         Text = currentComment.Text
                     });

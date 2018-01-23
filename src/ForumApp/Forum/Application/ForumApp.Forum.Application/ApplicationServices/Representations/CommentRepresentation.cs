@@ -11,7 +11,7 @@ namespace ForumApp.Forum.Application.ApplicationServices.Representations
     /// </summary>
     public class CommentRepresentation
     {
-        public string AuthorId { get; set; }
+        public string AuthorEmail { get; set; }
         public string Text { get; set; }
         public string PostId { get; set; }
     }

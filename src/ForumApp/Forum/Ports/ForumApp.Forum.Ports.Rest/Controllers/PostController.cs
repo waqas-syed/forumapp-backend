@@ -118,7 +118,7 @@ namespace ForumApp.Forum.Ports.Rest.Controllers
                 {
                     var addCommentCommand = JsonConvert.DeserializeObject<AddCommentCommand>(addCommentCommandJson.ToString());
                     // Add the new Comment
-                    _postApplicationService.AddCommentToPost(addCommentCommand, null);
+                    _postApplicationService.AddCommentToPost(addCommentCommand, GetEmailFromClaims());
                     return Ok();
                 }
             }

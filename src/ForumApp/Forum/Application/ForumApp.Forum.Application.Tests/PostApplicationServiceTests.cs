@@ -80,7 +80,7 @@ namespace ForumApp.Forum.Application.Tests
             string emailComment2 = "welfgta@12345-1.com";
             postApplicationService.AddCommentToPost(new AddCommentCommand()
             {
-                AuthorEmail = authorId2,
+                AuthorEmail = emailComment2,
                 Text = text2,
                 PostId = postId
             }, emailComment2);
@@ -88,9 +88,9 @@ namespace ForumApp.Forum.Application.Tests
             retreivedPost = postApplicationService.GetPostById(postId);
             Assert.NotNull(retreivedPost);
             Assert.AreEqual(2, retreivedPost.Comments.Count);
-            Assert.AreEqual(authorId1, retreivedPost.Comments[0].AuthorId);
+            Assert.AreEqual(emailComment1, retreivedPost.Comments[0].AuthorEmail);
             Assert.AreEqual(text1, retreivedPost.Comments[0].Text);
-            Assert.AreEqual(authorId2, retreivedPost.Comments[1].AuthorId);
+            Assert.AreEqual(emailComment2, retreivedPost.Comments[1].AuthorEmail);
             Assert.AreEqual(text2, retreivedPost.Comments[1].Text);
         }
     }

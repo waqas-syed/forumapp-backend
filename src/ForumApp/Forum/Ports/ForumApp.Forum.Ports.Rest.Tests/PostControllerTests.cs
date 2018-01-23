@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Http;
-using System.Web.Http.Results;
-using ForumApp.Forum.Application.ApplicationServices.Commands;
+﻿using ForumApp.Forum.Application.ApplicationServices.Commands;
 using ForumApp.Forum.Application.ApplicationServices.Representations;
 using ForumApp.Forum.Application.Ninject;
 using ForumApp.Forum.Infrastructure.Persistence.Ninject;
@@ -14,6 +7,10 @@ using ForumApp.Forum.Ports.Rest.Ninject;
 using Newtonsoft.Json;
 using Ninject;
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Web.Http;
+using System.Web.Http.Results;
 
 namespace ForumApp.Forum.Ports.Rest.Tests
 {
@@ -39,10 +36,21 @@ namespace ForumApp.Forum.Ports.Rest.Tests
             string title = "Post # 1";
             string description = "Description of Post # 1";
             string category = "Category of Post # 1";
+            string email = "wfgr@12345-1.com";
             var createPostCommand = new CreatePostCommand();
             createPostCommand.Title = title;
             createPostCommand.Description = description;
             createPostCommand.Category = category;
+            createPostCommand.Email = email;
+
+            // Set the Current User's username(which is the same as his email), otherwise the request for posting a new Post will fail
+            postController.User = new ClaimsPrincipal(new List<ClaimsIdentity>()
+            {
+                new ClaimsIdentity(new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Name, email)
+                })
+            });
 
             var postIdHttpContent = postController.Post(JsonConvert.SerializeObject(createPostCommand));
             string postId = ((OkNegotiatedContentResult<string>)postIdHttpContent).Content;
@@ -63,11 +71,21 @@ namespace ForumApp.Forum.Ports.Rest.Tests
             string title = "Post # 1";
             string description = "Description of Post # 1";
             string category = "Category of Post # 1";
+            string email = "wfgr@12345-1.com";
             var createPostCommand = new CreatePostCommand();
             createPostCommand.Title = title;
             createPostCommand.Description = description;
             createPostCommand.Category = category;
+            createPostCommand.Email = email;
 
+            // Set the Current User's username(which is the same as his email), otherwise the request for posting a new Post will fail
+            postController.User = new ClaimsPrincipal(new List<ClaimsIdentity>()
+            {
+                new ClaimsIdentity(new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Name, email)
+                })
+            });
             var postIdHttpContent = postController.Post(JsonConvert.SerializeObject(createPostCommand));
             string postId = ((OkNegotiatedContentResult<string>)postIdHttpContent).Content;
 
@@ -77,18 +95,34 @@ namespace ForumApp.Forum.Ports.Rest.Tests
 
             var authorId1 = "GandalfTheGrey";
             var text1 = "You shall not pass";
+            string emailComment1 = "wcom1@12345-1.com";
+            postController.User = new ClaimsPrincipal(new List<ClaimsIdentity>()
+            {
+                new ClaimsIdentity(new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Name, emailComment1)
+                })
+            });
             AddCommentCommand addCommentCommand = new AddCommentCommand()
             {
-                AuthorEmail = authorId1,
+                AuthorEmail = emailComment1,
                 PostId = postId,
                 Text = text1
             };
             postController.PostComment(JsonConvert.SerializeObject(addCommentCommand));
             var authorId2 = "GandalfTheWhite";
             var text2 = "I have returned to finish the job";
+            string emailComment2 = "wcom1@12345-2.com";
+            postController.User = new ClaimsPrincipal(new List<ClaimsIdentity>()
+            {
+                new ClaimsIdentity(new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Name, emailComment2)
+                })
+            });
             AddCommentCommand addCommentCommand2 = new AddCommentCommand()
             {
-                AuthorEmail = authorId2,
+                AuthorEmail = emailComment2,
                 PostId = postId,
                 Text = text2
             };
@@ -97,10 +131,10 @@ namespace ForumApp.Forum.Ports.Rest.Tests
             retreivedPost = ((OkNegotiatedContentResult<PostRepresentation>)response).Content;
             Assert.NotNull(retreivedPost);
             Assert.AreEqual(2, retreivedPost.Comments.Count);
-            Assert.AreEqual(authorId1, retreivedPost.Comments[0].AuthorId);
+            Assert.AreEqual(emailComment1, retreivedPost.Comments[0].AuthorEmail);
             Assert.AreEqual(postId, retreivedPost.Comments[0].PostId);
             Assert.AreEqual(text1, retreivedPost.Comments[0].Text);
-            Assert.AreEqual(authorId2, retreivedPost.Comments[1].AuthorId);
+            Assert.AreEqual(emailComment2, retreivedPost.Comments[1].AuthorEmail);
             Assert.AreEqual(postId, retreivedPost.Comments[1].PostId);
             Assert.AreEqual(text2, retreivedPost.Comments[1].Text);
         }
@@ -113,10 +147,21 @@ namespace ForumApp.Forum.Ports.Rest.Tests
             string title = "Post # 1";
             string description = "Description of Post # 1";
             string category = "Category of Post # 1";
+            string email = "wfgr@12345-1.com";
             var createPostCommand = new CreatePostCommand();
             createPostCommand.Title = title;
             createPostCommand.Description = description;
             createPostCommand.Category = category;
+            createPostCommand.Email = email;
+
+            // Set the Current User's username(which is the same as his email), otherwise the request for posting a new Post will fail
+            postController.User = new ClaimsPrincipal(new List<ClaimsIdentity>()
+            {
+                new ClaimsIdentity(new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Name, email)
+                })
+            });
 
             var postIdHttpContent = postController.Post(JsonConvert.SerializeObject(createPostCommand));
             string postId = ((OkNegotiatedContentResult<string>)postIdHttpContent).Content;
@@ -160,10 +205,21 @@ namespace ForumApp.Forum.Ports.Rest.Tests
             string title = "Post # 1";
             string description = "Description of Post # 1";
             string category = "Category of Post # 1";
+            string email = "wfgr@12345-1.com";
             var createPostCommand = new CreatePostCommand();
             createPostCommand.Title = title;
             createPostCommand.Description = description;
             createPostCommand.Category = category;
+            createPostCommand.Email = email;
+
+            // Set the Current User's username(which is the same as his email), otherwise the request for posting a new Post will fail
+            postController.User = new ClaimsPrincipal(new List<ClaimsIdentity>()
+            {
+                new ClaimsIdentity(new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Name, email)
+                })
+            });
 
             postController.Post(JsonConvert.SerializeObject(createPostCommand));
 
@@ -201,10 +257,21 @@ namespace ForumApp.Forum.Ports.Rest.Tests
             string title = "Post # 1";
             string description = "Description of Post # 6";
             string category = "Category of Post # 1";
+            string email = "wfgr@12345-1.com";
             var createPostCommand = new CreatePostCommand();
             createPostCommand.Title = title;
             createPostCommand.Description = description;
             createPostCommand.Category = category;
+            createPostCommand.Email = email;
+
+            // Set the Current User's username(which is the same as his email), otherwise the request for posting a new Post will fail
+            postController.User = new ClaimsPrincipal(new List<ClaimsIdentity>()
+            {
+                new ClaimsIdentity(new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Name, email)
+                })
+            });
 
             var postIdHttpContent = postController.Post(JsonConvert.SerializeObject(createPostCommand));
             string postId = ((OkNegotiatedContentResult<string>)postIdHttpContent).Content;
